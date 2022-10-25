@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Course from './Course/Course';
+import LeftSide from './LeftSide/LeftSide';
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -17,8 +18,7 @@ const Courses = () => {
             <div className='sm:flex'>
                 <div className=' text-white sm:py-4 sm:w-80'>
                     {
-                        courses.map(title => <p
-                            key={title.id} className='sm:my-6 my-2'><button className="btn btn-wide"><Link>{title.title}</Link></button></p>)
+                        courses.map(title => <LeftSide title={title} key={title._id}></LeftSide>)
 
                     }
                 </div>

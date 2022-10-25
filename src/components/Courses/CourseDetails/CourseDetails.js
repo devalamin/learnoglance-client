@@ -1,22 +1,26 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const CourseDetails = () => {
     const detailInfo = useLoaderData();
-    const { name, title, title_detail, image_detail, total_view, _id } = detailInfo;
+    console.log(detailInfo);
+    const { name, title, title_detail, img_detail, total_view, _id, details } = detailInfo;
     console.log(total_view);
     return (
-        <div>
-            <div className='mx-auto mt-32'>
+        <div className='mx-16'>
+            <div className='mx-auto sm:mt-20 mt-3'>
                 <div className="card bg-gradient-to-r from-teal-800 to-cyan-600 bg-base- shadow-lg">
                     <figure className="px-10 pt-10">
-                        <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl" />
+                        <img src={img_detail} alt="Shoes" className="rounded" />
                     </figure>
                     <div className="card-body items-center text-center">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <h2 className="card-title sm:text-3xl sm:font-bold text-teal-300">{title}</h2>
+                        <p className='text-white sm:text-xl'>{title_detail}</p>
+                        <div className='sm:p-10 bg-teal-500 sm:my-4 my-1'>
+                            <p className='text-start sm:p-5 p-2'>{details}</p>
+                        </div>
                         <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <button className="btn bg-cyan-900"><Link to='/checkout'>Check Out Now</Link></button>
                         </div>
                     </div>
                 </div>
