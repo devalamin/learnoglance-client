@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import { FaDownload } from "react-icons/fa";
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
 
+
+const ref = createRef();
 const CourseDetails = () => {
     const detailInfo = useLoaderData();
     console.log(detailInfo);
@@ -9,7 +14,7 @@ const CourseDetails = () => {
     return (
         <div className='mx-16'>
             <div className='mx-auto sm:mt-20 mt-3'>
-                <div className="card bg-gradient-to-r from-teal-800 to-cyan-600 bg-base- shadow-lg">
+                <div ref={ref} className="relative card bg-gradient-to-r from-teal-800 to-cyan-600 bg-base- shadow-lg">
                     <figure className="sm:px-10 sm:pt-10">
                         <img src={img_detail} alt="Shoes" className="rounded" />
                     </figure>
@@ -23,10 +28,20 @@ const CourseDetails = () => {
                             <button className="btn bg-cyan-900"><Link to={`/checkout/${_id}`}>Get premium access!</Link></button>
                         </div>
                     </div>
+
+
+                    <Pdf targetRef={ref} filename={name}>
+                        {({ toPdf }) => <div className='absolute top-6 right-6 cursor-pointer'>
+                            <FaDownload onClick={toPdf} className='text-2xl text-yellow-400'></FaDownload>
+                        </div>}
+                    </Pdf>
+
+
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default CourseDetails;
