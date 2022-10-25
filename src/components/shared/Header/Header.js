@@ -46,7 +46,7 @@ const Header = () => {
                     </ul>
                     {
                         user?.uid ? <><img onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className='h-12 duration-700 rounded-full relative' src={user?.photoURL} alt="" />
-                            {isHovering && <span className='mt-10 duration-700 absolute top-6 right-44 font-bold text-xl'>{user?.displayName}</span>}
+                            {isHovering && <span className='mt-10 duration-700 absolute text-yellow-500 top-10 right-44 font-bold text-xl'>{user?.displayName}</span>}
 
                             <span onClick={handleLogOut} className='bg-teal-700 py-2 px-4 ml-2 rounded text-red-900 cursor-pointer font-bold'>Log Out</span>
 

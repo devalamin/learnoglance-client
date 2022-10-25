@@ -35,12 +35,12 @@ export const routes = createBrowserRouter([
             {
                 path: '/course-details/:id',
                 element: <CourseDetails></CourseDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/course-details/${params.id}`)
+                loader: ({ params }) => fetch(`https://learno-glance-server.vercel.app/course-details/${params.id}`)
             },
             {
                 path: '/checkout/:id',
                 element: <PrivateRoute><Checkout></Checkout></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/checkout/${params.id}`)
+                loader: ({ params }) => fetch(`https://learno-glance-server.vercel.app/checkout/${params.id}`)
             }
         ]
     },
