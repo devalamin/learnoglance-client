@@ -1,11 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import navImg from '../../../images/educ.jpg'
 
 
+
+
 const Header = () => {
     const { user, userLogOut } = useContext(AuthContext);
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
 
     const handleLogOut = () => {
         userLogOut()
@@ -31,11 +42,15 @@ const Header = () => {
                         <li><Link to='/registration'>Registration</Link></li>
                     </ul>
                     {
-                        user?.uid ? <><img className='h-12 rounded-full' src={user?.photoURL} alt="" />
+                        user?.uid ? <><img onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className='h-12 duration-700 rounded-full relative' src={user?.photoURL} alt="" />
+                            {isHovering && <span className='mt-10 duration-700 absolute top-6 right-44 font-bold text-xl'>{user?.displayName}</span>}
+
                             <span onClick={handleLogOut} className='bg-teal-700 py-2 px-4 ml-2 rounded text-red-900 cursor-pointer font-bold'>Log Out</span>
+
                         </>
 
                             : <></>
+
                     }
                 </div>
             </div>
