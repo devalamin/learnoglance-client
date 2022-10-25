@@ -23,6 +23,7 @@ const Login = () => {
         googleSignInProvider(googleProvider)
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true })
                 console.log(user);
             })
             .catch(error => console.error(error.message))
@@ -32,6 +33,7 @@ const Login = () => {
         githubLoginProvider(githubProvider)
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true })
                 console.log(user)
             })
             .catch(error => setError(error))
