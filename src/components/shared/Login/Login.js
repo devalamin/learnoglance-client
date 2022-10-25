@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
@@ -6,11 +6,12 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 
 
 const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const Login = () => {
     const [error, setError] = useState('')
 
-    const { googleSignInProvider, LogIn } = useContext(AuthContext);
+    const { googleSignInProvider, githubLoginProvider, LogIn } = useContext(AuthContext);
 
 
     const handleGoogleSignIn = () => {
@@ -19,7 +20,17 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
             })
-            .catch(error => console.error(error))
+            .catch(error => console.error(error.message))
+    }
+
+    const handleGithubLogin = () => {
+        githubLoginProvider(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => setError(error))
+
     }
 
     const handleLoginSubmission = (event) => {
@@ -80,7 +91,7 @@ const Login = () => {
                             <span><FaGoogle className='text-yellow-300 mr-3 mb-0' /></span> Sign in with Google
                         </p>
                     </button>
-                    <button className="mx-auto bg-teal-700 hover:bg-cyan-900 sm:w-2/4 my-4 text-white font-bold rounded focus:outline-none focus:shadow-outline" type="button">
+                    <button onClick={handleGithubLogin} className="mx-auto bg-teal-700 hover:bg-cyan-900 sm:w-2/4 my-4 text-white font-bold rounded focus:outline-none focus:shadow-outline" type="button">
                         <p className='flex py-2 px-2'>
                             <span><FaGithub className=' mr-3 mb-0' /></span> Sign in with Github
                         </p>
