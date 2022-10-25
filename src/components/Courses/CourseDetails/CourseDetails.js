@@ -10,7 +10,7 @@ const CourseDetails = () => {
         <div className='mx-16'>
             <div className='mx-auto sm:mt-20 mt-3'>
                 <div className="card bg-gradient-to-r from-teal-800 to-cyan-600 bg-base- shadow-lg">
-                    <figure className="px-10 pt-10">
+                    <figure className="sm:px-10 sm:pt-10">
                         <img src={img_detail} alt="Shoes" className="rounded" />
                     </figure>
                     <div className="card-body items-center text-center">
@@ -20,7 +20,7 @@ const CourseDetails = () => {
                             <p className='text-start sm:p-5 p-2'>{details}</p>
                         </div>
                         <div className="card-actions">
-                            <button className="btn bg-cyan-900"><Link to='/checkout'>Check Out Now</Link></button>
+                            <button className="btn bg-cyan-900"><Link to={`/checkout/${_id}`}>Get premium access!</Link></button>
                         </div>
                     </div>
                 </div>

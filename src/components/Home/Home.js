@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import person from '../../images/person.jpg'
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
                         <h2 className="card-title">Wisdom Is Power</h2>
                         <p>Create A Nation Educated</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Learn now!</button>
+                            <button className="btn bg-sky-800"><Link to='/courses'>Learn now!</Link></button>
                         </div>
                     </div>
                 </div>
