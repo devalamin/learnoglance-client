@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import navImg from '../../../images/educ.jpg'
 
 
 const Header = () => {
+    const { user, userLogOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        userLogOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
     return (
         <div className='sm:mx-10'>
             <div className="navbar bg-base-100">
@@ -21,6 +30,13 @@ const Header = () => {
                         <li><Link to='/login'>Login</Link></li>
                         <li><Link to='/registration'>Registration</Link></li>
                     </ul>
+                    {
+                        user?.uid ? <><img className='h-12 rounded-full' src={user?.photoURL} alt="" />
+                            <span onClick={handleLogOut} className='bg-teal-700 py-2 px-4 ml-2 rounded text-red-900 cursor-pointer font-bold'>Log Out</span>
+                        </>
+
+                            : <></>
+                    }
                 </div>
             </div>
         </div>
