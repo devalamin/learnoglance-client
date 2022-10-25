@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { FaGoogle, FaGithub } from "react-icons/fa";
@@ -8,8 +8,9 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
+    const [error, setError] = useState('')
 
-    const { googleSignInProvider } = useContext(AuthContext);
+    const { googleSignInProvider, LogIn } = useContext(AuthContext);
 
 
     const handleGoogleSignIn = () => {
@@ -20,10 +21,29 @@ const Login = () => {
             })
             .catch(error => console.error(error))
     }
+
+    const handleLoginSubmission = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        LogIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset()
+                setError('')
+            })
+            .catch(error => setError(error.message))
+
+
+    }
+
     return (
         <div>
             <div className="w-1/3 mx-auto bg-white shadow-md rounded">
-                <form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={handleLoginSubmission} className="bg-white rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
                             Email
@@ -37,8 +57,11 @@ const Login = () => {
                         <input className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******" />
 
                     </div>
+                    <div>
+                        {error ? <span className='text-red-900'>{error}</span> : <></>}
+                    </div>
                     <div className="flex items-center justify-between">
-                        <button className="bg-teal-900 hover:bg-cyan-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button className="bg-teal-900 hover:bg-cyan-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Sign In
                         </button>
                         <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

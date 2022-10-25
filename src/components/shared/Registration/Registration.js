@@ -1,21 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Registration = () => {
 
+    const [error, setError] = useState('');
     const { createNewUser } = useContext(AuthContext);
 
     const createUserSubmission = (event) => {
         event.preventDefault();
-
         const form = event.target;
         const name = form.name.value;
         const photoURL = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, photoURL, email, password)
+        createNewUser(email, password)
+            .then(result => {
+                const user = result.user
+                setError('')
+                form.reset()
+            })
+            .catch(error => setError(error.message))
     }
 
     return (
@@ -26,29 +32,32 @@ const Registration = () => {
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Your Name
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name='name' type="text" placeholder="Your name" />
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='name' type="text" placeholder="Your name" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Photo Link
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name='photo' type="text" placeholder="photo url" />
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='photo' type="text" placeholder="photo url" />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Email
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name='email' type="text" placeholder="email" />
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name='email' type="text" placeholder="email" />
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                             Password
                         </label>
                         <input className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******" />
+                        <div>
+                            {error ? <span className='text-red-900'>{error}</span> : <></>}
+                        </div>
 
                     </div>
                     <div className="flex items-center justify-between">
-                        <button className="bg-teal-900 hover:bg-cyan-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button className="bg-teal-900 hover:bg-cyan-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Register
                         </button>
 
