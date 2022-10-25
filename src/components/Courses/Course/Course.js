@@ -14,7 +14,8 @@ const Course = ({ course }) => {
                     <p></p>
 
                     <div className="card-actions justify-end">
-                        <button className="btn bg-gradient-to-r from-cyan-100 to-teal-200 text-gray-700"><Link to={`/course-details/${_id}`}>Start Lesson</Link></button>
+
+                        <Link className='py-2 px-6 rounded bg-gradient-to-r from-cyan-100 to-teal-200 text-gray-700' to={`/course-details/${_id}`}>Start Lesson</Link>
                     </div>
                 </div>
             </div>
