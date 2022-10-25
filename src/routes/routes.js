@@ -7,6 +7,7 @@ import ErrorPage from "../components/pages/ErrorPage/ErrorPage";
 import Login from "../components/shared/Login/Login";
 import Registration from "../components/shared/Registration/Registration";
 import Main from "../layout/Main";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <Checkout></Checkout>,
+                element: <PrivateRoute><Checkout></Checkout></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/checkout/${params.id}`)
             }
         ]
