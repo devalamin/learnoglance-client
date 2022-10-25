@@ -8,6 +8,8 @@ const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
+    const [theme, setTheme] = useState("light");
+
 
 
 
@@ -41,7 +43,11 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const authInfo = { user, googleSignInProvider, githubLoginProvider, createNewUser, LogIn, userLogOut }
+    const toggleTheme = () => {
+        setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    };
+
+    const authInfo = { user, toggleTheme, theme, googleSignInProvider, githubLoginProvider, createNewUser, LogIn, userLogOut }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

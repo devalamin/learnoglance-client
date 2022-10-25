@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import navImg from '../../../images/educ.jpg'
+import ReactSwitch from 'react-switch';
+import { FaEye } from 'react-icons/fa';
 
 
 
 
 const Header = () => {
-    const { user, userLogOut } = useContext(AuthContext);
+    const { user, userLogOut, theme, toggleTheme } = useContext(AuthContext);
     const [isHovering, setIsHovering] = useState(false);
 
     const handleMouseOver = () => {
@@ -25,7 +27,7 @@ const Header = () => {
     }
 
     return (
-        <div className='sm:mx-10'>
+        <div className='sm:mx-10 mx-5 sm:pt-8 pt-3 sm:mb-10 mb-4'>
             <div className="navbar bg-base-100">
                 <div className="flex-1 ">
                     <img className='h-8 rounded' src={navImg} alt="" />
@@ -37,7 +39,8 @@ const Header = () => {
                         <li><Link to='/courses'>Courses</Link></li>
                         <li><Link>Blog</Link></li>
                         <li><Link>FAQ</Link></li>
-                        <li><Link>Dark</Link></li>
+                        <ReactSwitch className='mt-3 h-2' onChange={toggleTheme} checked={theme === "dark"} />
+
                         <li><Link to='/login'>Login</Link></li>
                         <li><Link to='/registration'>Registration</Link></li>
                     </ul>
