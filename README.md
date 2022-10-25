@@ -36,3 +36,12 @@ https://learnoglance.web.app/
 - Vercel Deployment For Server Side
 
 
+
+## Languages/Technologies
+- html
+- css
+- javascript
+- react
+- express
+- node 
+- tailwind
