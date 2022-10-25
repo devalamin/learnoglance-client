@@ -37,8 +37,8 @@ const Header = () => {
                     <ul className="menu sm:menu-horizontal p-0">
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/courses'>Courses</Link></li>
-                        <li><Link>Blog</Link></li>
-                        <li><Link>FAQ</Link></li>
+                        <li><Link to='/blogs'>Blog</Link></li>
+                        <li><Link to='faq'>FAQ</Link></li>
                         <ReactSwitch className='mt-3 h-2' onChange={toggleTheme} checked={theme === "dark"} />
 
                         <li><Link to='/login'>Login</Link></li>
